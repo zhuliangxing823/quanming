@@ -1,95 +1,134 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+﻿<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <title>Spring Boot</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-    <link href="../static/css/styles.css"
-          th:href="@{css/styles.css}"
-          rel="stylesheet"
-          media="screen"/>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<LINK rel="Bookmark" href="/favicon.ico"/>
+<LINK rel="Shortcut Icon" href="/favicon.ico"/>
+<link href="/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+<link href="/skin/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
+<link href="/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<title>全民广告后台管理系统</title>
 </head>
-<body class="background"
-      style="background: url('../static/img/background.png') no-repeat center center fixed;"
-      th:style="'background: url(' + @{/img/background.png} + ') no-repeat center center fixed;'">
-<nav class="navbar">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a name="header" class="navbar-brand" href="#">
-                Logged as :
-                <span sec:authentication="name"></span>
-                Role :
-                <span sec:authorize="hasRole('ROLE_ADMIN')">admin</span>
-                <span sec:authorize="hasRole('ROLE_USER')">user</span>
-            </a>
-        </div>
-        <ul class="navbar-header pull-right">
-            <a name="header" href="profile" class="navbar-brand"><span class="glyphicon glyphicon-user"></span> Profile</a>
-            <a name="header" href="logout" class="navbar-brand"><span class="glyphicon glyphicon-log-in"></span> Logout</a>
-        </ul>
-    </div>
-</nav>
-<div class="container">
-    <h2 class="centered">In this project I used:</h2>
-    <div class="row">
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://projects.spring.io/spring-boot/" target="_blank">
-                    <img alt="100%x200" src="../static/img/spring_boot.gif" th:src="@{img/spring_boot.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Spring Boot</h3>
-                    <p>Takes an opinionated view of building production-ready Spring applications.
-                        Spring Boot favors convention over configuration and is designed to get you up and running as quickly as possible.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://projects.spring.io/spring-framework/" target="_blank">
-                    <img alt="100%x200" src="../static/img/spring_framework.gif" th:src="@{img/spring_framework.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Spring Framework</h3>
-                    <p>Core support for dependency injection, transaction management, web applications, data access, messaging, testing and more.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://projects.spring.io/spring-security/" target="_blank">
-                    <img alt="100%x200" src="../static/img/spring_security.gif" th:src="@{img/spring_security.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Spring Security</h3>
-                    <p>Spring Security is a powerful and highly customizable authentication and access-control framework.
-                        It is the de-facto standard for securing Spring-based applications.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-xs-6 col-md-3">
-            <div class="thumbnail">
-                <a href="http://www.thymeleaf.org/" target="_blank">
-                    <img alt="100%x200" src="../static/img/thymeleaf.gif" th:src="@{img/thymeleaf.gif}"/>
-                </a>
-                <div class="caption">
-                    <h3>Thymeleaf</h3>
-                    <p>Thymeleaf is a Java library.
-                        It is a template engine capable of processing and generating HTML, XML, JavaScript, CSS and text, and can work both in web and non-web environments.
-                        It is better suited for serving the view layer of web applications, but it can process files in many formats, even in offline environments.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<body>
+<header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
+	<ul class="Hui-userbar">
+		<li>超级管理员</li>
+		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+			<ul class="dropDown-menu radius box-shadow">
+				<li><a href="#">个人信息</a></li>
+				<li><a href="#">切换账户</a></li>
+				<li><a href="#">退出</a></li>
+			</ul>
+		</li>
+		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
+			<ul class="dropDown-menu radius box-shadow">
+				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
+				<li><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></li>
+				<li><a href="javascript:;" data-val="green" title="绿色">绿色</a></li>
+				<li><a href="javascript:;" data-val="red" title="红色">红色</a></li>
+				<li><a href="javascript:;" data-val="yellow" title="黄色">黄色</a></li>
+				<li><a href="javascript:;" data-val="orange" title="绿色">橙色</a></li>
+			</ul>
+		</li>
+	</ul>
+	<a aria-hidden="false" class="Hui-nav-toggle" href="#"></a> </header>
+<aside class="Hui-aside">
+	<input runat="server" id="divScrollValue" type="hidden" value="" />
+	<div class="menu_dropdown bk_2">
+		<dl id="menu-product">
+			<dt><i class="Hui-iconfont">&#xe620;</i> 广告管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+				<li>
+				<a  href="javascript:void(0)" onclick="location='/js/product-list.html'">创意列表</a>
+				</li>
+				</ul>
+			</dd>
+		</dl>
 
-</div>
+		<dl id="menu-admin">
+			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="admin-role.html" href="javascript:void(0)">角色管理</a></li>
+					<li><a _href="admin-permission.html" href="javascript:void(0)">权限管理</a></li>
+					<li><a _href="admin-list.html" href="javascript:void(0)">管理员列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+	
+	</div>
+</aside>
+<div class="dislpayArrow"><a class="pngfix" href="javascript:void(0);" onClick="displaynavbar(this)"></a></div>
+<section class="Hui-article-box">
+	<div id="Hui-tabNav" class="Hui-tabNav">
+		<div class="Hui-tabNav-wp">
+			<ul id="min_title_list" class="acrossTab cl">
+				<li class="active"><span title="我的桌面" data-href="welcome.html">我的桌面</span><em></em></li>
+			</ul>
+		</div>
+		<div class="Hui-tabNav-more btn-group"><a id="js-tabNav-prev" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d4;</i></a><a id="js-tabNav-next" class="btn radius btn-default size-S" href="javascript:;"><i class="Hui-iconfont">&#xe6d7;</i></a></div>
+	</div>
+	<div id="iframe_box" class="Hui-article">
+		<div class="show_iframe">
+			<div style="display:none" class="loading"></div>
+			<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+		</div>
+	</div>
+</section>
+<script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="/lib/layer/1.9.3/layer.js"></script> 
+<script type="text/javascript" src="/js/H-ui.js"></script> 
+<script type="text/javascript" src="/js/H-ui.admin.js"></script> 
+<script type="text/javascript">
+/*资讯-添加*/
+function article_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*图片-添加*/
+function picture_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*产品-添加*/
+function product_add(title,url){
+	var index = layer.open({
+		type: 2,
+		title: title,
+		content: url
+	});
+	layer.full(index);
+}
+/*用户-添加*/
+function member_add(title,url,w,h){
+	layer_show(title,url,w,h);
+}
+</script> 
+<script type="text/javascript">
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s)})();
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>
-<script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.1/jquery.min.js"
-        th:src="@{/webjars/jquery/2.1.1/jquery.min.js}"></script>
-<script src="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/js/bootstrap.min.js"
-        th:src="@{/webjars/bootstrap/3.2.0/js/bootstrap.min.js}"></script>
-<script src="../static/js/home.js" th:src="@{js/home.js}"></script>
 </html>

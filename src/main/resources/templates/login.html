@@ -1,88 +1,66 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Boot</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.2.0/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.2.0/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen"/>
-    <link href="../static/css/styles.css"
-          th:href="@{css/styles.css}"
-          rel="stylesheet"
-          media="screen"/>
+<meta charset="utf-8"/>
+<meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+<link href="/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+<link href="/css/H-ui.login.css" rel="stylesheet" type="text/css" />
+<link href="/css/style.css" rel="stylesheet" type="text/css" />
+<link href="/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<title>全民广告</title>
 </head>
-<body class="background"
-      style="background: url('../static/img/background.png') no-repeat center center fixed;"
-      th:style="'background: url(' + @{/img/background.png} + ') no-repeat center center fixed;'">
-<div class="container" th:if="${param.registration}">
-    <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Registration form</h3>
-                </div>
-                <div class="panel-body">
-                    <form th:action="@{/registration}" method="post">
-                        <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="username" type="text"/>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value=""/>
-                            </div>
-                            <div class="form-group" th:if="${param.error}">
-                                <div class="alert alert-danger" role="alert">
-                                    User already exist
-                                </div>
-                            </div>
-                            <div class="form-group" th:if="${param.success}">
-                                <div class="alert alert-success" role="alert">
-                                    You successfully registered
-                                </div>
-                            </div>
-                            <div class="form-group" th:if="${param.errorServer}">
-                                <div class="alert alert-danger" role="alert">
-                                    Server error
-                                </div>
-                            </div>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Sigin"/>
-                            <input onclick="location.href='/login';" class="btn btn-lg btn-success btn-block" type="button" value="Login"/>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
+<body>
+<input type="hidden" id="TenantId" name="TenantId" value="" />
+ <form th:action="@{/login}" method="post">
+<div class="loginWraper">
+  <div id="loginform" class="loginBox">
+    <form class="form form-horizontal" action="index.html" method="post">
+      <div class="row cl">
+        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+        <div class="formControls col-8">
+          <input id="" name="" type="text" placeholder="账户" class="input-text size-L"/>
         </div>
-    </div>
-</div>
-<div class="container" th:unless="${param.registration}">
-    <div class="row vertical-offset-100">
-        <div class="col-md-4 col-md-offset-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Please sign in</h3>
-                </div>
-                <div class="panel-body">
-                    <form th:action="@{/login}" method="post">
-                        <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Username" name="username" type="text"/>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value=""/>
-                            </div>
-                            <div class="form-group" th:if="${param.error}">
-                                <div class="alert alert-danger" role="alert">
-                                    Invalid username and password
-                                </div>
-                            </div>
-                            <input class="btn btn-lg btn-success btn-block" type="submit" value="Login"/>
-                            <input onclick="location.href='/login?registration';" class="btn btn-lg btn-success btn-block" type="button" value="Registration"/>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
+      </div>
+      <div class="row cl">
+        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <div class="formControls col-8">
+          <input id="" name="" type="password" placeholder="密码" class="input-text size-L"/>
         </div>
-    </div>
+      </div>
+      <div class="row">
+        <div class="formControls col-8 col-offset-3">
+          <label for="online">
+            <input type="checkbox" name="online" id="online" value=""/>
+            使我保持登录状态</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="formControls col-8 col-offset-3">
+          <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
+          <input name="" type="reset" class="btn btn-default radius size-L" value="&nbsp;取&nbsp;&nbsp;&nbsp;&nbsp;消&nbsp;"/>
+        </div>
+      </div>
+    </form>
+  </div>
 </div>
+</form>
+<div class="footer">Copyright 上海银橙传媒 by quan_min_v_1.1</div>
+<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
+<script type="text/javascript" src="js/H-ui.js"></script> 
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>
 </body>
 </html>
