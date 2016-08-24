@@ -1,76 +1,82 @@
 package com.ycmedia.entity;
 
-
 public class User {
 
-  private String username;
-  private String password;
-  private String role;
-  
-  private String realname;
-  
-  private String mobile;
-  
-  private Integer state;
-  
-  private String info;
+	private Integer id;
+	private String username;
+	private String password;
+	private String role;
 
-  public String getUsername() {
-    return username;
-  }
+	private String realname;
 
-  public void setUsername(String username) {
-    this.username = username;
-  }
+	private String mobile;
 
-  public String getPassword() {
-    return password;
-  }
+	private Integer state;
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+	private String info;
 
-  public String getRole() {
-    return role;
-  }
+	public String getUsername() {
+		return username;
+	}
 
-  public void setRole(String role) {
-    this.role = role;
-  }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-public String getRealname() {
-	return realname;
-}
+	public String getPassword() {
+		return password;
+	}
 
-public void setRealname(String realname) {
-	this.realname = realname;
-}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-public String getMobile() {
-	return mobile;
-}
+	public String getRole() {
+		return role;
+	}
 
-public void setMobile(String mobile) {
-	this.mobile = mobile;
-}
+	public void setRole(String role) {
+		this.role = role;
+	}
 
-public Integer getState() {
-	return state;
-}
+	public String getRealname() {
+		return realname;
+	}
 
-public void setState(Integer state) {
-	this.state = state;
-}
+	public void setRealname(String realname) {
+		this.realname = realname;
+	}
 
-public String getInfo() {
-	return info;
-}
+	public String getMobile() {
+		return mobile;
+	}
 
-public void setInfo(String info) {
-	this.info = info;
-}
-  
-  
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public String getInfo() {
+		return info;
+	}
+
+	public void setInfo(String info) {
+		this.info = info;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 }

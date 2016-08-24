@@ -17,8 +17,12 @@ public class UserService {
 		return userDao.loadAllUsers();
 	}
 
-	public void saveUser(User user) {
-		userDao.saveUser(user);
+	/**
+	 * 保存用户
+	 * @param user
+     */
+	public void save(User user){
+	 	userDao.insert(user);
 	}
 
 }

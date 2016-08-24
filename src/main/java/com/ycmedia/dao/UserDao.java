@@ -13,5 +13,6 @@ public interface UserDao {
 	List<User> loadAllUsers();
 
 	void saveUser(@Param("user") User user);
+	Long insert(User user);
 
 }

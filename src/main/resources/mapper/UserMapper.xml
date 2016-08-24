@@ -5,16 +5,11 @@
 	
 <mapper namespace="com.ycmedia.dao.UserDao">
 	<select id="loadAllUsers" resultType="com.ycmedia.entity.User">
-	select * from users;
+	select * from admin_user;
 	</select>
 	
-	<insert id="saveUser" parameterType="com.ycmedia.entity.User">
-	  insert into users(username ,password,realname,role,mobile,state) 
-	  values(#{user.username},
-	  #{user.password},
-	  #{user.realname},
-	  #{user.role},
-	  #{user.mobile},
-	  #{user.state})
+	<insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.ycmedia.entity.User">
+		insert into admin_user(username,password,role,realname,mobile,state,info)
+		values(#{username},#{password},#{role},#{realname},#{mobile},#{state},#{info})
 	</insert>
 </mapper>

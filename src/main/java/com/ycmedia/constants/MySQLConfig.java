@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @MapperScan(basePackages = "com.ycmedia.dao", sqlSessionTemplateRef = "mysqlSqlSessionTemplate")
 public class MySQLConfig {
-	
+
 	@Primary
 	@Bean(name = "mysqlDS")
 	@ConfigurationProperties(prefix = "spring.datasource")
@@ -41,10 +41,13 @@ public class MySQLConfig {
 	 * @throws Exception
 	 */
 	@Bean(name = "mysqlSqlSessionFactory")
-	public SqlSessionFactory sqlSessionFactory(@Qualifier("mysqlDS") DataSource ds) throws Exception {
+	public SqlSessionFactory sqlSessionFactory(
+			@Qualifier("mysqlDS") DataSource ds) throws Exception {
 		final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
 		sessionFactory.setDataSource(ds);
-		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:/mapper/*.xml"));
+		sessionFactory
+				.setMapperLocations(new PathMatchingResourcePatternResolver()
+						.getResources("classpath:/mapper/*.xml"));
 		return sessionFactory.getObject();
 	}
 
@@ -57,7 +60,8 @@ public class MySQLConfig {
 	 */
 	@Bean(name = "mysqlSqlSessionTemplate")
 	public SqlSessionTemplate sqlSessionTemplate(
-			@Qualifier("mysqlSqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
+			@Qualifier("mysqlSqlSessionFactory") SqlSessionFactory sqlSessionFactory)
+			throws Exception {
 		return new SqlSessionTemplate(sqlSessionFactory);
 	}
 }

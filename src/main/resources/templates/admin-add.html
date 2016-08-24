@@ -14,18 +14,32 @@
 </head>
 <body>
 <div class="pd-20">
-<form th:action="@{/addSingleUser}" method="post"  th:object="${user}" class="form form-horizontal" id="form-admin-add" action="#" >
+	<form th:action="@{/addSingleUser}" method="post" th:object="${user}" class="form form-horizontal" id="form-admin-add">
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" th:field="*{username}"  datatype="*2-16" nullmsg="用户名不能为空"/>
+				<input type="text" class="input-text" th:field="*{username}" datatype="*2-16" nullmsg="用户名不能为空"/>
 			</div>
 			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>密码：</label>
+			<label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" th:field="*{realname}" datatype="*2-16" nullmsg="真实姓名不能为空"/>
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>初始密码：</label>
 			<div class="formControls col-5">
 				<input type="password" placeholder="密码" autocomplete="off" th:field="*{password}" class="input-text" datatype="*6-20" nullmsg="密码不能为空"/>
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>确认密码：</label>
+			<div class="formControls col-5">
+				<input type="password" placeholder="确认新密码" autocomplete="off" class="input-text Validform_error" datatype="*" errormsg="您两次输入的新密码不一致！" nullmsg="请再输入一次新密码！" recheck="password"/>
 			</div>
 			<div class="col-4"> </div>
 		</div>
@@ -55,7 +69,7 @@
 		</div>
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
-				<input class="btn btn-primary radius" type="button" onclick="subform();" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
 			</div>
 		</div>
 	</form>
@@ -64,37 +78,27 @@
 <script type="text/javascript" src="/lib/icheck/jquery.icheck.min.js"></script> 
 <script type="text/javascript" src="/lib/Validform/5.3.2/Validform.min.js"></script> 
 <script type="text/javascript" src="/lib/layer/1.9.3/layer.js"></script> 
-<script type="text/javascript" src="/js/H-ui.js"></script> 
+<script type="text/javascript" src="/js/H-ui.js"></script>
 <script type="text/javascript" src="/js/H-ui.admin.js"></script> 
 <script type="text/javascript">
-$("#form-admin-add").Validform({
-	tiptype:2
-});
-function subform(){
-    var form = document.getElementById('form-admin-add');//
-    var url ="/addSingleUser";
-    $.ajax({
-    	cache: true,
-    	type: "POST",
-    	url:url,
-    	data:$('#form-admin-add').serialize(),// 
-    	async: false,
-    	error: function(request) {
-    		alert("Connection error");
-    	},
-    	success: function(data) {
-    		alert("用户添加成功！");
-    		 window.parent.location.reload();
-    		//成功就关闭页面
-    		var index = parent.layer.getFrameIndex(window.name);
-    		parent.layer.close(index);
-    				
-    	}
-    });
-    
+	$(function(){
+		$('.skin-minimal input').iCheck({
+			checkboxClass: 'icheckbox-blue',
+			radioClass: 'iradio-blue',
+			increaseArea: '20%'
+		});
 
-	
- }
+		$("#form-admin-add").Validform({
+			tiptype:2,
+			showAllError:true,
+			ajaxPost:true,
+			callback:function(result){
+				var index = parent.layer.getFrameIndex(window.name);
+				parent.$('#admin-list-refresh')[0].click();
+				parent.layer.close(index);
+			}
+		});
+	});
 </script>
 </body>
 </html>

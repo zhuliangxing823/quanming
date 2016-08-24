@@ -1,7 +1,9 @@
 package com.ycmedia.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -92,16 +94,19 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping(value = "/addSingleUser",method=RequestMethod.POST)
-	public ModelAndView addSingleUser(@ModelAttribute(value="user")User user){
-		JSONObject json = new JSONObject();
-		System.err.println(user.getUsername());
-		try {
-			userService.saveUser(user);
-			json.put("success", true);
-		} catch (Exception e) {
-		
+	@ResponseBody
+	public Map<String, Object> addSingleUser( @ModelAttribute(value="user")User user){
+		Map<String, Object> result = new HashMap<String, Object>();
+		try{
+			userService.save(user);
+			//TODO 可以封装成工具类
+			result.put("flag", true);
+			result.put("msg", "保存成功");
+		}catch (Exception e){
+			result.put("flag", false);
+			result.put("msg", "系统错误，请联系管理员！");
 		}
-		return  new ModelAndView("redirect:/admin-list");
+		return result;
 	}
 	
 	

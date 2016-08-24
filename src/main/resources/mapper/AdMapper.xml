@@ -24,4 +24,10 @@
 		ORDER BY
 			create_time DESC
 	</select>
+	
+	<select id="getCreativeTpl" resultType="com.ycmedia.entity.CreativeTpl">
+	SELECT id , info , url ,ad_type as adType ,ord from r_creative_tpl   order by id asc
+	</select>
+	
+	
 </mapper>

@@ -14,49 +14,40 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-  @Autowired
-  private UserDetailsService userDetailsService;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-  @Override
-  protected void configure(HttpSecurity http) throws Exception {
-    http
-        .authorizeRequests()
-        .antMatchers("/login","/css/**", "/js/**", "/images/**", "/resources/**", "/lib/**","/skin/**","/template/**")
-        .permitAll();
-    http
-        .authorizeRequests()
-        .antMatchers("/addUser")
-        .permitAll();
-    http
-        .authorizeRequests().anyRequest().authenticated();
-    http
-        .formLogin().failureUrl("/login?error")
-        .defaultSuccessUrl("/")
-        .loginPage("/login")
-        .permitAll()
-        .and()
-        .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl(
-        "/login")
-        .permitAll();
-  }
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests()
+				.antMatchers("/login", "/css/**", "/js/**", "/images/**",
+						"/resources/**", "/lib/**", "/skin/**", "/template/**")
+				.permitAll();
+		http.authorizeRequests().anyRequest().authenticated();
+		http.formLogin().failureUrl("/login?error").defaultSuccessUrl("/")
+				.loginPage("/login").permitAll().and().logout()
+				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+				.logoutSuccessUrl("/login").permitAll();
+	}
 
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-//    web
-//        .ignoring()
-//        .antMatchers("/resources/**");
-//    web
-//        .ignoring()
-//        .antMatchers("/webjars/**");
-//    web
-//        .ignoring()
-//        .antMatchers("/img/**");
-      web.ignoring().antMatchers("/**");
-  }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// web
+		// .ignoring()
+		// .antMatchers("/resources/**");
+		// web
+		// .ignoring()
+		// .antMatchers("/webjars/**");
+		// web
+		// .ignoring()
+		// .antMatchers("/img/**");
+		web.ignoring().antMatchers("/**");
+	}
 
-  @Override
-  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-    auth.userDetailsService(userDetailsService);
-  }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth)
+			throws Exception {
+		auth.userDetailsService(userDetailsService);
+	}
 
 }
