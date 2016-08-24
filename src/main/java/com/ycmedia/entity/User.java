@@ -1,5 +1,6 @@
 package com.ycmedia.entity;
 
+
 public class User {
 
   private String username;
@@ -11,6 +12,8 @@ public class User {
   private String mobile;
   
   private Integer state;
+  
+  private String info;
 
   public String getUsername() {
     return username;
@@ -58,6 +61,14 @@ public Integer getState() {
 
 public void setState(Integer state) {
 	this.state = state;
+}
+
+public String getInfo() {
+	return info;
+}
+
+public void setInfo(String info) {
+	this.info = info;
 }
   
   

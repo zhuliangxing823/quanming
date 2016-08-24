@@ -1,5 +1,6 @@
-﻿<!DOCTYPE HTML>
-<html>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8"/>
 <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
@@ -16,7 +17,7 @@
 <title>全民广告后台管理系统</title>
 </head>
 <body>
-<header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
+<header class="Hui-header cl"> <a class="Hui-logo l" title="全民广告" href="/">全民广告后台管理系统</a> <a class="Hui-logo-m l" href="/" title="全民广告">全民广告</a> <span class="Hui-subtitle l"></span>
 	<ul class="Hui-userbar">
 		<li>超级管理员</li>
 		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
@@ -47,7 +48,8 @@
 			<dd>
 				<ul>
 				<li>
-				<a  href="javascript:void(0)" onclick="location='/js/product-list.html'">创意列表</a>
+				<li><a _href="product-list.html" href="javascript:void(0)">广告列表</a></li>
+			
 				</li>
 				</ul>
 			</dd>
@@ -57,9 +59,8 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="admin-role.html" href="javascript:void(0)">角色管理</a></li>
 					<li><a _href="admin-permission.html" href="javascript:void(0)">权限管理</a></li>
-					<li><a _href="admin-list.html" href="javascript:void(0)">管理员列表</a></li>
+					<li><a _href="admin-list.html" href="javascript:void(0)">用户管理</a></li>
 				</ul>
 			</dd>
 		</dl>
@@ -79,7 +80,7 @@
 	<div id="iframe_box" class="Hui-article">
 		<div class="show_iframe">
 			<div style="display:none" class="loading"></div>
-			<iframe scrolling="yes" frameborder="0" src="welcome.html"></iframe>
+			<iframe scrolling="yes" frameborder="0" src="product-list.html"></iframe>
 		</div>
 	</div>
 </section>
@@ -88,33 +89,9 @@
 <script type="text/javascript" src="/js/H-ui.js"></script> 
 <script type="text/javascript" src="/js/H-ui.admin.js"></script> 
 <script type="text/javascript">
-/*资讯-添加*/
-function article_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*图片-添加*/
-function picture_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
-/*产品-添加*/
-function product_add(title,url){
-	var index = layer.open({
-		type: 2,
-		title: title,
-		content: url
-	});
-	layer.full(index);
-}
+
+
+
 /*用户-添加*/
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);

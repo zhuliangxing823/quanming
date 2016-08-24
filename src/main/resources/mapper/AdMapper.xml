@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ycmedia.dao.AdDao">
+	<select id="getAdList" resultType="com.ycmedia.entity.Creative">
+		SELECT
+		adId,
+		uid,
+		title,
+		content,
+		loading_page AS loadingPage,
+		audit_reason AS auditReason,
+		audit_reason_show AS additShow,
+		update_time AS updateTime,
+		publish_status AS publishStatus,
+	  create_time as publishTime
+	FROM
+		r_creative
+	ORDER BY
+		create_time DESC
+	</select>
+</mapper>
