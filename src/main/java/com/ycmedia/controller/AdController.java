@@ -28,7 +28,13 @@ public class AdController {
      private  AdService adservice;
   
 
-	  @RequestMapping(value = "/product-list")
+	  /**
+	   * 查询广告列表
+	 * @param beginDate
+	 * @param endDate
+	 * @return
+	 */
+	 @RequestMapping(value = "/product-list")
 	  @ResponseBody
 	   public ModelAndView getAdList(@RequestParam(value="beginDate",required=false) Date beginDate,
 			   @RequestParam(value="endDate",required=false) Date endDate
@@ -37,10 +43,10 @@ public class AdController {
 		  try {
 			   list = adservice.getAdList();
 		    } catch (Exception e) {
+		    	
 		 }
 		  
 		  return new ModelAndView("product-list", "list", list);
-//		   return "product-list";
 	   }
 	  
 }

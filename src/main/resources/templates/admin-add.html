@@ -84,6 +84,7 @@ function subform(){
     	},
     	success: function(data) {
     		alert("用户添加成功！");
+    		 window.parent.location.reload();
     		//成功就关闭页面
     		var index = parent.layer.getFrameIndex(window.name);
     		parent.layer.close(index);
