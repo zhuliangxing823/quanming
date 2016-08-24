@@ -5,20 +5,23 @@
 	
 <mapper namespace="com.ycmedia.dao.AdDao">
 	<select id="getAdList" resultType="com.ycmedia.entity.Creative">
-		SELECT
-		adId,
-		uid,
-		title,
-		content,
-		loading_page AS loadingPage,
-		audit_reason AS auditReason,
-		audit_reason_show AS additShow,
-		update_time AS updateTime,
-		publish_status AS publishStatus,
-	  create_time as publishTime
-	FROM
-		r_creative
-	ORDER BY
-		create_time DESC
+				SELECT
+			adId,
+			uid,
+			title,
+			content,
+			loading_page AS loadingPage,
+			audit_reason AS auditReason,
+			audit_reason_show AS additShow,
+			update_time AS updateTime,
+			publish_status AS publishStatus,
+		  create_time as publishTime,
+	    `status` ,
+	  audit_status  as auditStatus
+	 
+		FROM
+			r_creative
+		ORDER BY
+			create_time DESC
 	</select>
 </mapper>

@@ -47,6 +47,17 @@ public class Creative {
     private Date updateTime;
     
     private Date publishTime;
+    /**
+     * 投放状态
+     */
+    private String status ;
+    
+    
+    /**
+     * 审核状态
+     */
+    private String auditStatus;
+    
 
     /**
      * 发布状态 0  未发布， 1 发布， 3 删除
@@ -137,6 +148,36 @@ public class Creative {
 
 	public void setPublishTime(Date publishTime) {
 		this.publishTime = publishTime;
+	}
+
+	public String getStatus() {
+		if(status.equals("0")){
+			return "待投放";
+		}else if(status.equals("1")){
+			return "投放中";
+		} else if(status.equals("2")){
+			return "暂停";
+		}else{
+		  return "投放结束";
+		}
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getAuditStatus() {
+		if(auditStatus.equals("0")){
+			return "未审核";
+		}else if(auditStatus.equals("1")){
+			return "审核通过";
+		}else{
+			return "审核失败";
+		}
+	}
+
+	public void setAuditStatus(String auditStatus) {
+		this.auditStatus = auditStatus;
 	}
 
 
