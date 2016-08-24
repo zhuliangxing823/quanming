@@ -90,7 +90,10 @@ public class UserController {
 		return new ModelAndView("admin-add");
 	}
 	
+	
 	/**
+	 * 添加一个用户
+	 * @param user
 	 * @return
 	 */
 	@RequestMapping(value = "/addSingleUser",method=RequestMethod.POST)

@@ -22,6 +22,12 @@ public class UserService {
 	 * @param user
      */
 	public void save(User user){
+		
+		if(user.getRole()=="0"){
+			user.setRole("管理员");
+		}else{
+			user.setRole("普通用户");
+		}
 	 	userDao.insert(user);
 	}
 
