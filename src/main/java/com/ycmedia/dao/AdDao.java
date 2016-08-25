@@ -17,4 +17,6 @@ public interface AdDao {
 
 	Creative findAdById(@Param("id")String id);
 
+	void updateCreative(@Param("creative")Creative creative);
+
 }

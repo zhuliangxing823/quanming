@@ -30,7 +30,23 @@
 	</select>
 	<!-- 根据广告ID查询广告 -->
 	<select id="findAdById" resultType="com.ycmedia.entity.Creative">
-	select * from r_creative where adId=#{id}
+	select 
+		adId,
+			uid,
+			title,
+			content,
+			loading_page AS loadingPage,
+			audit_reason AS auditReason,
+			audit_reason_show AS additShow,
+			update_time AS updateTime,
+			publish_status AS publishStatus
+	
+	from r_creative where adId=#{id}
 	</select>
+	
+	<!-- 修改广告审核 -->
+	<update id="updateCreative" parameterType="com.ycmedia.entity.Creative">
+	 update  r_creative set audit_reason_show=#{creative.additShow} where adId=#{creative.adId}
+	</update>
 	
 </mapper>

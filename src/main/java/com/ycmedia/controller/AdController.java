@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ycmedia.entity.Creative;
 import com.ycmedia.entity.CreativeTpl;
+import com.ycmedia.entity.User;
 import com.ycmedia.service.AdService;
 
 /**
@@ -81,11 +83,22 @@ public class AdController {
 	 * @return
 	 */
 	@RequestMapping(value = "/product-edit")
-	public ModelAndView  editAd(@RequestParam("id")String id ,Creative creative){
+	public ModelAndView  toEditAd(@RequestParam("id")String id ,Creative creative){
 		creative = adservice.findAdById(id);
-		System.err.println(id);
-//		model.addAttribute("id", id);
 		return new ModelAndView("product-add" ,"creative",creative );
+	}
+	
+	@RequestMapping(value = "/editAd")
+	public ModelAndView  editAdReason(@ModelAttribute(value="creative")Creative creative,Model model ){
+		
+		try {
+			adservice.updateCreative(creative);
+			model.addAttribute("code", "200");
+		} catch (Exception e) {
+			model.addAttribute("code", "500");
+			
+		}
+		return  new ModelAndView("redirect:/product-list");
 	}
 
 }

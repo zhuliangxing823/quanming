@@ -28,4 +28,8 @@ public class AdService {
 		return adDao.findAdById(id);
 	}
 
+	public void updateCreative(Creative creative) {
+		adDao.updateCreative(creative);
+	}
+
 }

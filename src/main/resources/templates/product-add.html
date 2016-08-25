@@ -15,22 +15,65 @@
 </head>
 <body>
 <div class="pd-20">
-	<form  method="post" th:object="${creative}"  class="form form-horizontal" id="form-admin-add">
+	<form  method="post" th:object="${creative}"  class="form form-horizontal" th:action="@{/editAd}" id="dataFrom">
 	
-		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>广告ID：
-			<input type="text" class="input-text"   th:field="*{adId}" />
-			</label>
+			<div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>广告ID：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" th:field="*{adId}" readonly= "true " />
+			</div>
 			<div class="col-4"> </div>
 		</div>
 		
 		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>审核理由：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" th:field="*{auditReason}" readonly= "true "/>
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red"></span>审核修改：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" th:field="*{additShow}" />
+			</div>
+			<div class="col-4"> </div>
+		</div>
+		<div class="row cl">
 			<div class="col-9 col-offset-3">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
+				<input class="btn btn-primary radius" onclick="submitForm()" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;"/>
 			</div>
 		</div>
 	</form>
 </div>
+<script type="text/javascript">
+ function submitForm(){
+	 
+	 var form =document.getElementById("dataFrom");
+	 var url ="/editAd";
+	 $.ajax({
+		 type:"post",
+		 url:url,
+	     data:$('#dataFrom').serialize(),
+	     asyns:false,
+	     success: function(data){
+	    	 alert("修改成功！");
+	    		var index = parent.layer.getFrameIndex(window.name);
+				parent.$('#product-list-refresh')[0].click();
+				parent.layer.close(index);
+	     }
+		 
+		 
+		 
+	 }
+			 
+	 
+	 
+	 );
+	 
+ }
+
+</script>
 <script type="text/javascript" src="/lib/jquery/1.9.1/jquery.min.js"></script> 
 <script type="text/javascript" src="/lib/icheck/jquery.icheck.min.js"></script> 
 <script type="text/javascript" src="/lib/Validform/5.3.2/Validform.min.js"></script> 
