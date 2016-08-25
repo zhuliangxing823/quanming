@@ -31,6 +31,7 @@
 						<th width="100">审核修改</th>
 						<th width="60">创建时间</th>
 						<th width="60">更新时间</th>
+						<th width="60">操作</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,6 +46,7 @@
 						<td  th:text="${adver.additShow}"></td>
 						<td class="text-l" th:text="${#calendars.format(adver.publishTime,'yyyy-MM-dd HH:mm:ss')}"></td>
 						<td class="text-l" th:text="${#calendars.format(adver.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td class="td-manage"> <a style="text-decoration:none" class="ml-5" onClick="product_edit('编辑','product-add.html','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> </td>
 					</tr>
 				</tbody>
 			</table>
@@ -65,6 +67,11 @@ $('.table-sort').dataTable({
 	  {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
 	]
 });
+
+/*图片-编辑*/
+function product_edit(title,url,id){
+	layer_show(title,url,700,520);
+}
 </script>
 </body>
 </html>

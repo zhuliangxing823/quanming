@@ -15,4 +15,6 @@ public interface UserDao {
 	void saveUser(@Param("user") User user);
 	Long insert(User user);
 
+	User findUserByName(@Param("username")String username);
+
 }

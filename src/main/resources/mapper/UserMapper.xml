@@ -12,4 +12,9 @@
 		insert into admin_user(username,password,role,realname,mobile,state,info)
 		values(#{username},#{password},#{role},#{realname},#{mobile},#{state},#{info})
 	</insert>
+	
+	<select id="findUserByName" resultType="com.ycmedia.entity.User">
+	select * from admin_user where username=#{username}
+	
+	</select>
 </mapper>

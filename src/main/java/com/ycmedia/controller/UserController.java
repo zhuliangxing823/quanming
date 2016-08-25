@@ -22,8 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.alibaba.fastjson.JSONObject;
-import com.ycmedia.dao.UserDetailsServiceDAO;
 import com.ycmedia.entity.User;
 import com.ycmedia.service.UserService;
 
@@ -31,13 +29,12 @@ import com.ycmedia.service.UserService;
 public class UserController {
 
 	@Autowired
-	UserDetailsServiceDAO userDetailsServiceDAO;
-	@Autowired
 	private UserService userService;
 	
 	User user = new User();
 
-	@RequestMapping("/login")
+	@RequestMapping(value="/login")
+	@ResponseBody
 	public ModelAndView login() {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
@@ -45,22 +42,6 @@ public class UserController {
 			return  new ModelAndView("login");
 		} else {
 			return  new ModelAndView("home");
-		}
-	}
-
-	
-
-	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
-	public String addUser(@RequestParam("username") String username,
-			@RequestParam("password") String password) {
-		try {
-			User u = new User();
-			u.setUsername(username);
-			u.setPassword(password);
-			userDetailsServiceDAO.saveUser(u);
-			return "userList";
-		} catch (Exception e) {
-			return null;
 		}
 	}
 
