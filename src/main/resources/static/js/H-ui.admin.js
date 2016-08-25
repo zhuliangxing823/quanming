@@ -187,6 +187,8 @@ function layer_show(title,url,w,h){
 		content: url
 	});
 }
+
+
 /*关闭弹出框口*/
 function layer_close(){
 	var index = parent.layer.getFrameIndex(window.name);

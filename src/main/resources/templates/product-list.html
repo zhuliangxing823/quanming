@@ -1,5 +1,6 @@
-﻿<!DOCTYPE HTML>
-<html>
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8"/>
 <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
@@ -46,7 +47,8 @@
 						<td  th:text="${adver.additShow}"></td>
 						<td class="text-l" th:text="${#calendars.format(adver.publishTime,'yyyy-MM-dd HH:mm:ss')}"></td>
 						<td class="text-l" th:text="${#calendars.format(adver.updateTime,'yyyy-MM-dd HH:mm:ss')}"></td>
-						<td class="td-manage"> <a style="text-decoration:none" class="ml-5" onClick="product_edit('编辑','product-add.html','1')" href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> </td>
+						
+						<td class="td-manage"> <a style="text-decoration:none" class="ml-5" th:onclick="'javascript:product_edit('+${adver.adId}+');'"   href="javascript:;" title="编辑"><i class="Hui-iconfont">&#xe6df;</i></a> </td>
 					</tr>
 				</tbody>
 			</table>
@@ -69,8 +71,8 @@ $('.table-sort').dataTable({
 });
 
 /*图片-编辑*/
-function product_edit(title,url,id){
-	layer_show(title,url,700,520);
+function product_edit(id){
+	   layer_show('广告编辑',"/product-edit?id="+id,700,520);
 }
 </script>
 </body>

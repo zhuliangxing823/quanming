@@ -1,5 +1,6 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8"/>
 <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
@@ -10,13 +11,16 @@
 <link href="/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
 <link href="/lib/icheck/icheck.css" rel="stylesheet" type="text/css" />
 <link href="/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-<title>添加用户</title>
+<title>修改广告</title>
 </head>
 <body>
 <div class="pd-20">
-	<form  method="post" th:object="creative" class="form form-horizontal" id="form-admin-add">
+	<form  method="post"  class="form form-horizontal" id="form-admin-add">
+	
 		<div class="row cl">
-			<label class="form-label col-3"><span class="c-red">*</span>用户名：</label>
+			<label class="form-label col-3"><span class="c-red">*</span>广告ID：
+			<input type="text" class="input-text"  th:text="${id}" />
+			</label>
 			<div class="col-4"> </div>
 		</div>
 		

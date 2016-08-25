@@ -9,6 +9,8 @@ import javax.xml.ws.soap.Addressing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,9 +80,10 @@ public class AdController {
 	 * 跳转到编辑广告
 	 * @return
 	 */
-	@RequestMapping(value = "/product-add")
-	public ModelAndView  editAd(@RequestParam(value="id")String id){
+	@RequestMapping(value = "/product-edit")
+	public ModelAndView  editAd(@RequestParam("id")String id ,Model model){
 		System.err.println(id);
+		model.addAttribute("id", id);
 		return new ModelAndView("product-add");
 	}
 

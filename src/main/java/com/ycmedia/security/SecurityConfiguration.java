@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login").permitAll();
 		
-	    //允许ifram 嵌套
+	    //允许iframe 嵌套
 		http.headers().frameOptions().disable();
 	}
 
@@ -48,7 +48,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		 web
 		 .ignoring()
 		 .antMatchers("/img/**");
-//		web.ignoring().antMatchers("/**");
 	}
 
 	@Override
