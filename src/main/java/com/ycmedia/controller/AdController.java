@@ -81,10 +81,11 @@ public class AdController {
 	 * @return
 	 */
 	@RequestMapping(value = "/product-edit")
-	public ModelAndView  editAd(@RequestParam("id")String id ,Model model){
+	public ModelAndView  editAd(@RequestParam("id")String id ,Creative creative){
+		creative = adservice.findAdById(id);
 		System.err.println(id);
-		model.addAttribute("id", id);
-		return new ModelAndView("product-add");
+//		model.addAttribute("id", id);
+		return new ModelAndView("product-add" ,"creative",creative );
 	}
 
 }

@@ -14,7 +14,7 @@
 	</insert>
 	
 	<select id="findUserByName" resultType="com.ycmedia.entity.User">
-	select * from admin_user where username=#{username}
-	
+	 select * from admin_user where username=#{username}
 	</select>
+	
 </mapper>

@@ -28,6 +28,9 @@
 	<select id="getCreativeTpl" resultType="com.ycmedia.entity.CreativeTpl">
 	SELECT id , info , url ,ad_type as adType ,ord from r_creative_tpl   order by id asc
 	</select>
-	
+	<!-- 根据广告ID查询广告 -->
+	<select id="findAdById" resultType="com.ycmedia.entity.Creative">
+	select * from r_creative where adId=#{id}
+	</select>
 	
 </mapper>

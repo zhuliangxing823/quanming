@@ -15,11 +15,11 @@
 </head>
 <body>
 <div class="pd-20">
-	<form  method="post"  class="form form-horizontal" id="form-admin-add">
+	<form  method="post" th:object="${creative}"  class="form form-horizontal" id="form-admin-add">
 	
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>广告ID：
-			<input type="text" class="input-text"  th:text="${id}" />
+			<input type="text" class="input-text"   th:field="*{adId}" />
 			</label>
 			<div class="col-4"> </div>
 		</div>

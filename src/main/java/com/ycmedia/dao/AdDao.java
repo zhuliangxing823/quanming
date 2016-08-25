@@ -2,6 +2,7 @@ package com.ycmedia.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.ycmedia.entity.Creative;
@@ -13,5 +14,7 @@ public interface AdDao {
 	List<Creative> getAdList();
 
 	List<CreativeTpl> getCreativeTpl();
+
+	Creative findAdById(@Param("id")String id);
 
 }

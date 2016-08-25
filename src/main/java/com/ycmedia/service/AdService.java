@@ -24,4 +24,8 @@ public class AdService {
 		return adDao.getCreativeTpl();
 	}
 
+	public Creative findAdById(String id) {
+		return adDao.findAdById(id);
+	}
+
 }
