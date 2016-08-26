@@ -24,6 +24,7 @@ public class Application extends WebMvcConfigurerAdapter {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("/").setViewName("home");
+		registry.addViewController("/loginout").setViewName("login");
 	}
 
 	public static void main(String[] args) {
