@@ -119,7 +119,7 @@ public class Creative {
 	}
 
 	public String getAdditShow() {
-		return additShow;
+		return additShow==null?auditReason:additShow;
 	}
 
 	public void setAdditShow(String additShow) {
