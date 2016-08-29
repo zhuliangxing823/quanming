@@ -7,7 +7,7 @@
 
 	<!--客户列表-->
 	<select id="customerList" resultType="com.ycmedia.entity.Customer">
-			select id,uid,mobile,token,sum_money as sumMoney,create_time as createTime,update_time as updateTime
+			select id,uid,mobile,token,round(sum_money/100,2) as doubleSumMoney,create_time as createTime,update_time as updateTime
 			from r_user
 	</select>
 

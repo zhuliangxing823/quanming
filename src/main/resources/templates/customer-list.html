@@ -22,14 +22,13 @@
             <table class="table table-border table-bordered table-bg table-hover table-sort">
                 <thead>
                 <tr>
-                    <th scope="col" colspan="8">客户列表</th>
+                    <th scope="col" colspan="7">客户列表</th>
                 </tr>
                 <tr class="text-c">
                     <th width="25"><input type="checkbox"/></th>
                     <th width="200">客户id</th>
                     <th width="200">联系方式</th>
-                    <th width="200">密钥</th>
-                    <th width="200">总充值金额(分)</th>
+                    <th width="200">总充值金额(元)</th>
                     <th width="200">创建时间</th>
                     <th width="200">修改时间</th>
                     <th width="70">操作</th>
@@ -41,8 +40,7 @@
                         <input type="checkbox"  th:value="${customer.id}" /></span></td>
                     <td th:text="${customer.uid}"></td>
                     <td th:text="${customer.mobile}"></td>
-                    <td th:text="${customer.token}"></td>
-                    <td th:text="${customer.sumMoney}"></td>
+                    <td th:text="${customer.doubleSumMoney}"></td>
                     <td th:text="${#dates.format(customer.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td th:text="${#dates.format(customer.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
                     <td class="f-14" >
@@ -65,10 +63,10 @@
 <script type="text/javascript">
 
     $('.table-sort').dataTable({
-        "aaSorting": [[ 5, "desc" ]],//默认第几个排序
+        "aaSorting": [[ 4, "desc" ]],//默认第几个排序
         "bStateSave": true,//状态保存
         "aoColumnDefs": [
-            {"orderable":false,"aTargets":[0,7]}// 制定列不参与排序
+            {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
         ]
     });
 

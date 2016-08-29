@@ -33,6 +33,11 @@ public class Customer {
     /**
      * 总充值金额  单位是分
      */
+    private double doubleSumMoney;
+
+    /**
+     * 总充值金额  单位是分
+     */
     private long sumMoney;
 
     /**
@@ -60,6 +65,10 @@ public class Customer {
     public String getToken() {return token;}
 
     public void setToken(String token) {this.token = token;}
+
+    public double getDoubleSumMoney() {return doubleSumMoney;}
+
+    public void setDoubleSumMoney(double doubleSumMoney) {this.doubleSumMoney = doubleSumMoney;}
 
     public long getSumMoney() {return sumMoney;}
 
