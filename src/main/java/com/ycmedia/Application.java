@@ -18,13 +18,14 @@ public class Application extends WebMvcConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		return new UserService();
 	}
+    
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("login");
 		registry.addViewController("/home").setViewName("home");
 		registry.addViewController("/").setViewName("home");
-		registry.addViewController("/loginout").setViewName("login");
+		registry.addViewController("/logout").setViewName("login");
 	}
 
 	public static void main(String[] args) {

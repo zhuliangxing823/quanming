@@ -35,12 +35,13 @@ public class UserController {
 
 	@RequestMapping(value="/login")
 	@ResponseBody
-	public ModelAndView login() {
+	public ModelAndView login(Model model) {
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
 		if (auth instanceof AnonymousAuthenticationToken) {
 			return  new ModelAndView("login");
 		} else {
+			
 			return  new ModelAndView("home");
 		}
 	}

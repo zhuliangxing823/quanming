@@ -1,5 +1,6 @@
 package com.ycmedia.entity;
 
+
 public class User {
 
 	private Integer id;

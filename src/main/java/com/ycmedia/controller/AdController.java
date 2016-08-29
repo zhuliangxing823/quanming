@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.ws.soap.Addressing;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -45,6 +46,7 @@ public class AdController {
 	 * @param endDate
 	 * @return
 	 */
+	 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/product-list")
 	@ResponseBody
 	public ModelAndView getAdList(
