@@ -7,6 +7,7 @@ import java.util.List;
 import javax.xml.ws.soap.Addressing;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -35,6 +36,8 @@ public class AdController {
 	private AdService adservice;
 	
 	Creative creative = new Creative();
+	
+	CreativeTpl tpl = new CreativeTpl();
 
 	/**
 	 * 查询广告列表
@@ -43,6 +46,7 @@ public class AdController {
 	 * @param endDate
 	 * @return
 	 */
+	 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/product-list")
 	@ResponseBody
 	public ModelAndView getAdList(
@@ -78,7 +82,7 @@ public class AdController {
 		return new ModelAndView("creativetpl-list", "list", list);
 	}
 	
-	/**
+	/**tpl-add
 	 * 跳转到编辑广告
 	 * @return
 	 */
@@ -88,14 +92,30 @@ public class AdController {
 		return new ModelAndView("product-add" ,"creative",creative );
 	}
 	
+	/**
+	 * 
+	 * 跳转到编辑广告
+	 * @return
+	 */
+	@RequestMapping(value = "/tpl-add")
+	public ModelAndView  toTplAdd(@ModelAttribute(value="tpl")CreativeTpl tpl){
+		return new ModelAndView("tpl-add" );
+	}
+	
+	
+	/**
+	 * 审核内容修改
+	 * @param creative
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/editAd")
 	public ModelAndView  editAdReason(@ModelAttribute(value="creative")Creative creative,Model model ){
-		
 		try {
 			adservice.updateCreative(creative);
-			model.addAttribute("code", "200");
+			model.addAttribute("success", true);
 		} catch (Exception e) {
-			model.addAttribute("code", "500");
+			model.addAttribute("success", false);
 			
 		}
 		return  new ModelAndView("redirect:/product-list");

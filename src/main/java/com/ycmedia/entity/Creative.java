@@ -63,6 +63,12 @@ public class Creative {
      * 发布状态 0  未发布， 1 发布， 3 删除
      */
     private String publishStatus;
+    
+    
+    private String address;
+    
+    private String lonLa;
+    
 
 	public int getAdId() {
 		return adId;
@@ -178,6 +184,22 @@ public class Creative {
 
 	public void setAuditStatus(String auditStatus) {
 		this.auditStatus = auditStatus;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getLonLa() {
+		return lonLa;
+	}
+
+	public void setLonLa(String lonLa) {
+		this.lonLa = lonLa;
 	}
 
 
