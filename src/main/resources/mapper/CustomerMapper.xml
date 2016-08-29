@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ycmedia.dao.CustomerDao">
+
+	<!--客户列表-->
+	<select id="customerList" resultType="com.ycmedia.entity.Customer">
+			select id,uid,mobile,token,sum_money as sumMoney,create_time as createTime,update_time as updateTime
+			from r_user
+	</select>
+
+	<!--根据id查询客户信息-->
+	<select id="findCustomerById" resultType="com.ycmedia.entity.Customer">
+		select id,mobile,sum_money as sumMoney from r_user where id=#{id}
+	</select>
+
+	<!--添加客户-->
+	<insert id="addCustomer" useGeneratedKeys="true" keyProperty="id" parameterType="com.ycmedia.entity.Customer">
+		insert into r_user(uid,mobile,sum_money,create_time) values(#{uid},#{mobile},#{sumMoney},now())
+	</insert>
+
+	<!--编辑客户-->
+	<update id="updateCustomer" parameterType="com.ycmedia.entity.Customer">
+		update r_user set mobile=#{customer.mobile},sum_money=#{customer.sumMoney} where id = #{customer.id}
+	</update>
+
+	<!--删除客户-->
+	<delete id="deleteCustomer">
+		delete from r_user where id in
+		<foreach item="item" index="index" collection="idList"
+				 open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+</mapper>
