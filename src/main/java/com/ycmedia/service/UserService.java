@@ -42,12 +42,11 @@ public class UserService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		User user = userDao.findUserByName(username);
-		
-
-		
 		if (user == null) {
 		      throw new UsernameNotFoundException(username + " not found");
 		    }
+		
+		System.err.println(user.getRole()+"正在执行查询角色名称");
 		    return new UserDetails() {
 		      @Override
 		      public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -24,12 +24,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.antMatchers("/login", "/css/**", "/js/**", "/images/**",
+				.antMatchers( "/css/**", "/js/**", "/images/**",
 						"/resources/**", "/lib/**", "/skin/**", "/template/**")
 				.permitAll();
 		http.authorizeRequests().anyRequest().authenticated();
 		http.formLogin().failureUrl("/login?error").defaultSuccessUrl("/")
-				.loginPage("/login").permitAll().and().logout()
+				.loginPage("/login")
+				.permitAll().and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/login").permitAll();
 
