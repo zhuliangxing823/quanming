@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ycmedia.dao.RebackDao">
+
+	<!--反馈意见列表-->
+	<select id="rebackList" resultType="com.ycmedia.entity.Reback">
+			select id,uid,reback,mobile,create_time as createTime,update_time as updateTime from r_reback;
+	</select>
+
+	<!--删除反馈意见信息-->
+	<delete id="deleteReback">
+		delete from r_reback where id in
+		<foreach item="item" index="index" collection="idList"
+				 open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

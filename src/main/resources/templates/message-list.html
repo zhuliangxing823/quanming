@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link href="/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <title>短信管理</title>
+</head>
+<body class="pos-r">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 系统管理 <span class="c-gray en">&gt;</span> 短信管理 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="/message-list.html" id="message-list-refresh" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+        <div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l">
+             <a href="#" data-toggle="modal" id="delete_message" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a></span>  </div>
+        <div style="margin-top:5px;">
+            <table class="table table-border table-bordered table-bg table-hover table-sort">
+                <thead>
+                <tr>
+                    <th scope="col" colspan="7">信息列表</th>
+                </tr>
+                <tr class="text-c">
+                    <th width="25"><input type="checkbox"/></th>
+                    <th width="400">短信信息</th>
+                    <th width="200">联系方式</th>
+                    <th width="200">返回状态</th>
+                    <th width="200">创建时间</th>
+                    <th width="200">修改时间</th>
+                    <th width="70">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="message, iterStat : ${messageList}" class="text-c va-m">
+                    <td><span class="check_id">
+                        <input type="checkbox"  th:value="${message.id}" /></span></td>
+                    <td th:text="${message.message}"></td>
+                    <td th:text="${message.mobile}"></td>
+                    <td th:text="${message.code}"></td>
+                    <td th:text="${#dates.format(message.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td th:text="${#dates.format(message.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                    <td class="f-14" >
+                        <a title="删除" href="#" th:onclick="'javascript:delete_message('+${message.id}+');'" class="ml-5" style="text-decoration:none"><i class="Hui-iconfont">&#xe6e2;</i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<script th:src="@{/lib/jquery/1.9.1/jquery.min.js}"></script>
+<script th:src="@{/lib/layer/1.9.3/layer.js}"></script>
+<script th:src="@{/lib/My97DatePicker/WdatePicker.js}"></script>
+<script th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/H-ui.js}"></script>
+<script th:src="@{/js/H-ui.admin.js}"></script>
+
+<script type="text/javascript">
+
+    $('.table-sort').dataTable({
+        "aaSorting": [[ 4, "desc" ]],//默认第几个排序
+        "bStateSave": true,//状态保存
+        "aoColumnDefs": [
+            {"orderable":false,"aTargets":[0,6]}// 制定列不参与排序
+        ]
+    });
+
+
+
+
+    /*删除短信*/
+    $("#delete_message").click(function () {
+        var idList = [];
+        $(".check_id input:checked").each(function (k, v) {
+            idList.push($(v).val());
+        });
+
+       if($(".check_id input:checked").length==0){
+           layer.msg('请选中后在删除！', {icon: 2, time: 1500});
+           return;
+       };
+       delete_message(idList);
+    });
+
+
+
+    function delete_message(idList){
+
+            //此处请求后台程序，下方是成功后的前台处理……
+            $.ajax({
+                type: "get",
+                url: "/delete-message",
+                data: "id_list=" + idList,
+                success: function (result) {
+                    if (!result.status) {
+                        layer.msg(result.message, {icon: 1, time: 5000});
+                        return;
+                    }
+                    window.location.href=$('#message-list-refresh').attr('href');
+                    layer.msg(result.message, {icon: 1, time: 5000});
+                }
+            });
+
+    }
+
+</script>
+</body>
+</html>
