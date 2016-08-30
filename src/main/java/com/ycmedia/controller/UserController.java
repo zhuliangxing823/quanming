@@ -45,23 +45,30 @@ public class UserController {
 	@ResponseBody
 	public ModelAndView login(Model model) {
 		
-		Authentication auth = SecurityContextHolder.getContext()
-				.getAuthentication();
-		if (auth instanceof AnonymousAuthenticationToken) {
-			return  new ModelAndView("login");
-		} else {
-			//获取用户登录权限详细
-			Object  pinciba=auth.getPrincipal();
-			if(pinciba instanceof  UserDetails){
-				UserDetails userDetail = ((UserDetails) pinciba);
-				model.addAttribute("username", userDetail.getUsername());
-				User u =userService.getUserByname(userDetail.getUsername());
-				model.addAttribute("realName",u.getRealname());
+		try {
+			Authentication auth = SecurityContextHolder.getContext()
+					.getAuthentication();
+			if (auth instanceof AnonymousAuthenticationToken) {
+				return  new ModelAndView("login");
+			} else {
+				//获取用户登录权限详细
+				Object  pinciba=auth.getPrincipal();
+				if(pinciba instanceof  UserDetails){
+					UserDetails userDetail = ((UserDetails) pinciba);
+					model.addAttribute("username", userDetail.getUsername());
+					User u =userService.getUserByname(userDetail.getUsername());
+					model.addAttribute("realName",u.getRealname());
+				}
+				
+				//登录成功跳到主页
+				return  new ModelAndView("home");
 			}
-			
-			
-			return  new ModelAndView("home");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return  new ModelAndView("login");
 		}
+		
+
 	}
 	
 

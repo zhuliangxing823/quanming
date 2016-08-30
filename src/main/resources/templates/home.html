@@ -19,15 +19,8 @@
 <body>
 <header class="Hui-header cl"> <a class="Hui-logo l" title="全民广告" href="/">全民广告后台管理系统</a> <a class="Hui-logo-m l" href="/" title="全民广告">全民广告</a> <span class="Hui-subtitle l"></span>
 	<ul class="Hui-userbar">
-		<li> 欢迎你 ： </li>
-		<li class="dropDown dropDown_hover" th:text="${realName}"><a href="#" class="dropDown_A"><i class="Hui-iconfont">&#xe6d5;</i></a>
-			<ul class="dropDown-menu radius box-shadow">
-				<li><a href="#">个人信息</a></li>
-				<li><a href="#">切换账户</a></li>
-				<li><a th:href="@{/logout}">退出</a></li>
-			</ul>
-		</li>
-		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li th:text="${username}"></li>
+		<li><a th:href="@{/logout}">注销</a></li>
 		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -54,8 +47,15 @@
 				</ul>
 			</dd>
 		</dl>
-
-		<dl id="menu-admin">
+		<dl id="menu-customer">
+			<dt><i class="Hui-iconfont">&#xe60d;</i>客户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<li><a _href="customer-list.html" href="javascript:void(0)">客户列表</a></li>
+				</ul>
+			</dd>
+		</dl>
+			<dl id="menu-admin">
 			<dt><i class="Hui-iconfont">&#xe62d;</i>系统管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
@@ -63,15 +63,6 @@
 					<li><a _href="admin-list.html" href="javascript:void(0)">用户管理</a></li>
 					<li><a _href="message-list.html" href="javascript:void(0)">短信管理</a></li>
 					<li><a _href="reback-list.html" href="javascript:void(0)">意见反馈管理</a></li>
-				</ul>
-			</dd>
-		</dl>
-
-		<dl id="menu-customer">
-			<dt><i class="Hui-iconfont">&#xe60d;</i>客户管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
-			<dd>
-				<ul>
-					<li><a _href="customer-list.html" href="javascript:void(0)">客户列表</a></li>
 				</ul>
 			</dd>
 		</dl>

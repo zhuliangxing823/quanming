@@ -15,13 +15,13 @@
 </head>
 <body>
 <input type="hidden" id="TenantId" name="TenantId" value="" />
- <form th:action="@{/login}" method="post">
+ <form th:action="@{/login}" method="post" class="form form-horizontal">
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
       <div class="row cl">
         <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
         <div class="formControls col-8">
-          <input id="" name="username" type="text" placeholder="账户" class="input-text size-L"/>
+          <input id="" name="username" type="text" placeholder="用户名" class="input-text size-L"/>
         </div>
       </div>
       <div class="row cl">
@@ -30,13 +30,16 @@
           <input id="" name="password" type="password" placeholder="密码" class="input-text size-L"/>
         </div>
       </div>
-      <div class="row">
-        <div class="formControls col-8 col-offset-3">
-          <label for="online">
-            <input type="checkbox" name="online" id="online" value=""/>
-            使我保持登录状态</label>
-        </div>
-      </div>
+       <div class="row"  th:if="${param.error}">
+                                <div class="alert alert-danger" role="alert" align="center">
+                                  <font color="red">用户名或者密码错误!</font>         
+                                </div>
+       </div>
+        <div class="row"  th:if="${param.logout}">
+                                <div class="alert alert-danger" role="alert" align="center">
+                                  <font color="red">您已注销成功</font>         
+                                </div>
+       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
           <input name="" type="submit" class="btn btn-success radius size-L" value="&nbsp;登&nbsp;&nbsp;&nbsp;&nbsp;录&nbsp;"/>
