@@ -47,16 +47,18 @@ public class UserController {
 		
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
-		
-		Object  pinciba=auth.getPrincipal();
-		if(pinciba instanceof  UserDetails){
-			String userName = ((UserDetails) pinciba).getUsername();
-			System.err.println(userName);
-		}
 		if (auth instanceof AnonymousAuthenticationToken) {
-			System.err.println("TIAOZ");
 			return  new ModelAndView("login");
 		} else {
+			//获取用户登录权限详细
+			Object  pinciba=auth.getPrincipal();
+			if(pinciba instanceof  UserDetails){
+				UserDetails userDetail = ((UserDetails) pinciba);
+				model.addAttribute("username", userDetail.getUsername());
+				User u =userService.getUserByname(userDetail.getUsername());
+				model.addAttribute("realName",u.getRealname());
+			}
+			
 			
 			return  new ModelAndView("home");
 		}

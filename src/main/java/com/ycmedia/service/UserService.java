@@ -109,5 +109,8 @@ public class UserService implements UserDetailsService {
 		    }
 
 		  }
+	public User getUserByname(String username) {
+		return userDao.findUserByName(username);
+	}
 
 }
