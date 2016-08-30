@@ -46,7 +46,7 @@ public class AdController {
 	 * @param endDate
 	 * @return
 	 */
-	 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")
+	// @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")
 	@RequestMapping(value = "/product-list")
 	@ResponseBody
 	public ModelAndView getAdList(
@@ -86,6 +86,7 @@ public class AdController {
 	 * 跳转到编辑广告
 	 * @return
 	 */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/product-edit")
 	public ModelAndView  toEditAd(@RequestParam("id")String id ,Creative creative){
 		creative = adservice.findAdById(id);
@@ -97,6 +98,7 @@ public class AdController {
 	 * 跳转到编辑广告
 	 * @return
 	 */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/tpl-add")
 	public ModelAndView  toTplAdd(@ModelAttribute(value="tpl")CreativeTpl tpl){
 		return new ModelAndView("tpl-add" );
