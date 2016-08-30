@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -33,19 +35,38 @@ public class UserController {
 	
 	User user = new User();
 
-	@RequestMapping(value="/login")
+	/**
+	 * 
+	 *  WebAuthenticationDetails@21a2c: RemoteIpAddress: 0:0:0:0:0:0:0:1; SessionId:
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value={"/login","/"})
 	@ResponseBody
 	public ModelAndView login(Model model) {
+		
 		Authentication auth = SecurityContextHolder.getContext()
 				.getAuthentication();
+		
+		Object  pinciba=auth.getPrincipal();
+		if(pinciba instanceof  UserDetails){
+			String userName = ((UserDetails) pinciba).getUsername();
+			System.err.println(userName);
+		}
 		if (auth instanceof AnonymousAuthenticationToken) {
+			System.err.println("TIAOZ");
 			return  new ModelAndView("login");
 		} else {
 			
 			return  new ModelAndView("home");
 		}
 	}
+	
 
+	
+	
+	
+	
 	/**
 	 * 获取角色列表
 	 * @return
