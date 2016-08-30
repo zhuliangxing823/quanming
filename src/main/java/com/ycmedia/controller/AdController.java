@@ -46,7 +46,7 @@ public class AdController {
 	 * @param endDate
 	 * @return
 	 */
-	 @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+	 @PreAuthorize("hasAnyAuthority('ROLE_ADMIN','ROLE_USER')")
 	@RequestMapping(value = "/product-list")
 	@ResponseBody
 	public ModelAndView getAdList(

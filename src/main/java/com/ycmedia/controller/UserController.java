@@ -36,7 +36,8 @@ public class UserController {
 	User user = new User();
 
 	/**
-	 * 
+	 * @PreAuthorize("hasRole(‘ROLE_USER‘) or hasRole(‘ROLE_ADMIN‘)")
+	 *  @PreAuthorize("hasRole(‘ROLE_ADMIN‘)")
 	 *  WebAuthenticationDetails@21a2c: RemoteIpAddress: 0:0:0:0:0:0:0:1; SessionId:
 	 * @param model
 	 * @return
@@ -124,7 +125,22 @@ public class UserController {
 		return result;
 	}
 	
-	
+    /**
+     * 无权限访问页
+     * @return
+     */
+    @RequestMapping(value = "/403", method = RequestMethod.GET)
+    public ModelAndView accesssDenied() {
+        ModelAndView model = new ModelAndView();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (!(auth instanceof AnonymousAuthenticationToken)) {
+            UserDetails userDetail = (UserDetails) auth.getPrincipal();
+            model.addObject("username", userDetail.getUsername());
+        }
+
+        model.setViewName("403");
+        return model;
+}
 	
 	
 }
