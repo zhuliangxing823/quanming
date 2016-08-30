@@ -3,6 +3,7 @@ package com.ycmedia.controller;
 import com.ycmedia.entity.Customer;
 import com.ycmedia.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -47,6 +48,7 @@ public class CustomerController {
 	 * @param
 	 * @return add-edit-customer.html 跳转页面
 	 * */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/add-edit-customer")
 	public ModelAndView  addEditCustomer(@RequestParam(value = "id")int id,@ModelAttribute(value="customer")Customer customer){
 		if ( id > 0){
@@ -64,6 +66,7 @@ public class CustomerController {
 	 * @param customer 顾客实体
 	 * @return customer-list 重定向
 	 * */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/add-edit-cus",method= RequestMethod.POST)
 	public ModelAndView  addEditCustomer(@ModelAttribute(value="customer")Customer customer,Model model){
 		try {
@@ -89,6 +92,7 @@ public class CustomerController {
 	 *
 	 * @return customer-list 重定向
 	 * */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/delete-customer")
 	@ResponseBody
 	public Map<String, Object> deleteCustomer(HttpServletRequest request){

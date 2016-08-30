@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link href="/css/H-ui.min.css" rel="stylesheet" type="text/css" />
+    <link href="/css/H-ui.admin.css" rel="stylesheet" type="text/css" />
+    <link href="/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="/lib/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+    <title>订单管理</title>
+</head>
+<body class="pos-r">
+    <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 订单管理 <span class="c-gray en">&gt;</span> 订单列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="/order-list.html" id="order-list-refresh" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
+    <div class="pd-20">
+        <table class="table table-border table-bordered table-bg table-hover table-sort">
+            <thead>
+            <tr>
+                <th scope="col" colspan="10">订单列表</th>
+            </tr>
+            <tr class="text-c">
+                <th width="200">客户id</th>
+                <th width="100">订单号</th>
+                <th width="300">支付宝/微信交易号</th>
+                <th width="80">订单金额(元)</th>
+                <th width="100">订单标题</th>
+                <th width="150">广告详情</th>
+                <th width="80">订单状态</th>
+                <th width="80">支付方式</th>
+                <th width="200">创建时间</th>
+                <th width="200">修改时间</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="order, iterStat : ${orderList}" class="text-c va-m">
+                <td th:text="${order.uid}"></td>
+                <td th:text="${order.outTradeNo}"></td>
+                <td th:text="${order.tradeNo}"></td>
+                <td th:text="${order.m}"></td>
+                <td th:text="${order.subject}"></td>
+                <td th:text="${order.body}"></td>
+                <span th:switch="${order.state}">
+                    <td th:case="0" th:text="未支付"></td>
+                    <td th:case="1" th:text="支付成功"></td>
+                    <td th:case="2" th:text="支付失败"></td>
+                </span>
+                <span th:switch="${order.payType}">
+                    <td th:case="1" th:text="支付宝"></td>
+                    <td th:case="2" th:text="微信"></td>
+                    <td th:case="3" th:text="系统赠送"></td>
+                </span>
+                <td th:text="${#dates.format(order.createTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                <td th:text="${#dates.format(order.updateTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+<script th:src="@{/lib/jquery/1.9.1/jquery.min.js}"></script>
+<script th:src="@{/lib/layer/1.9.3/layer.js}"></script>
+<script th:src="@{/lib/My97DatePicker/WdatePicker.js}"></script>
+<script th:src="@{/lib/datatables/1.10.0/jquery.dataTables.min.js}"></script>
+<script th:src="@{/js/H-ui.js}"></script>
+<script th:src="@{/js/H-ui.admin.js}"></script>
+
+<script type="text/javascript">
+
+    $('.table-sort').dataTable({
+        "aaSorting": [[ 8, "desc" ]],//默认第几个排序
+        "bStateSave": true,//状态保存
+    });
+</script>
+</body>
+</html>

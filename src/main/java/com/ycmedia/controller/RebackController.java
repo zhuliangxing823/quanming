@@ -4,6 +4,7 @@ import com.ycmedia.entity.MessageLog;
 import com.ycmedia.entity.Reback;
 import com.ycmedia.service.RebackService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,6 +51,7 @@ public class RebackController {
 	 *
 	 * @return Map 提示信息
 	 * */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/delete-reback")
 	@ResponseBody
 	public Map<String, Object> deleteReback(HttpServletRequest request){

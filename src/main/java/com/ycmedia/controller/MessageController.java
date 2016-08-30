@@ -3,6 +3,7 @@ package com.ycmedia.controller;
 import com.ycmedia.entity.MessageLog;
 import com.ycmedia.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,6 +50,7 @@ public class MessageController {
 	 *
 	 * @return Map 提示信息
 	 * */
+	@PreAuthorize("hasAnyAuthority('ROLE_ADMIN')")
 	@RequestMapping(value = "/delete-message")
 	@ResponseBody
 	public Map<String, Object> deleteMessage(HttpServletRequest request){

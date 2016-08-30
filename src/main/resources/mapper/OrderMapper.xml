@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.ycmedia.dao.OrderDao">
+
+	<!--订单列表-->
+	<select id="orderList" resultType="com.ycmedia.entity.Order">
+			select id,uid,out_trade_no as outTradeNo,trade_no as tradeNo,round(money/100,2) as m,`subject`,body,state,pay_type as payType,create_time as createTime,update_time as updateTime from r_order;
+	</select>
+
+</mapper>
