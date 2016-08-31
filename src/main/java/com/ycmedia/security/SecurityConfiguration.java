@@ -18,6 +18,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	@Autowired
+	private YcAnthencationProder provider;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -30,6 +32,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().anyRequest().authenticated();
 		//访问失败页url
 		http.formLogin().failureUrl("/login?error").
+		//登录信息保存
+		successHandler(loginSuccessHandler()).
 		//访问成功页url
 		defaultSuccessUrl("/login")
 		//默认访问页
@@ -41,6 +45,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 		// 允许iframe 嵌套
 		http.headers().frameOptions().disable();
+		//关闭csrf 防止循环定向
+		http.csrf().disable();
 	}
 
 	@Override
@@ -53,8 +59,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
+		//采用自定义验证
+		auth.authenticationProvider(provider);
 		//需要采用加密
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
 	@Bean
@@ -68,9 +76,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	 */
 	@Bean
 	public LoginSuccessHandler loginSuccessHandler(){
-		return new LoginSuccessHandler();//code6
+		return new LoginSuccessHandler();
 	}
 	
+
 
 
 }
