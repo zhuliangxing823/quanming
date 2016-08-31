@@ -21,6 +21,9 @@ public class Application extends WebMvcConfigurerAdapter {
 	public UserDetailsService userDetailsService() {
 		return new UserService();
 	}
+	/**
+	 * 自定义异常页
+	 */
 	@Bean
 	public EmbeddedServletContainerCustomizer containerCustomizer() {
 
