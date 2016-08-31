@@ -23,7 +23,7 @@
 					<tr class="text-c">
 	
 						<th width="40">广告ID</th>
-						<th width="40">用户ID</th>
+						<th width="40">用户手机号码</th>
 						<th width="60">标题</th>
 						<th width="60">发布状态</th>
 						<th width="60">投放状态</th>
@@ -39,10 +39,10 @@
 				 <tr th:each="adver, iterStat : ${list}" class="text-c va-m">
 						<td th:text="${adver.adId}"></td>
 						<td th:text="${adver.uid}"></td>
-						<td class="text-l" th:text="${adver.title}"></td>
-						<td class="td-status" th:text="${adver.publishStatus}"></td>
-						<td class="td-status" th:text="${adver.status}"></td>
-						<td class="td-status" th:text="${adver.auditStatus}"></td>
+						<td  th:text="${adver.title}"></td>
+						<td  th:text="${adver.publishStatus}"></td>
+						<td  th:text="${adver.status}"></td>
+						<td  th:text="${adver.auditStatus}"></td>
 						<td  th:text="${adver.auditReason}"></td>
 						<td  th:text="${adver.additShow}"></td>
 					    <td  th:text="${adver.address}"></td>

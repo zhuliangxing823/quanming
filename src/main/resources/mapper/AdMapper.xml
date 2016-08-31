@@ -5,27 +5,24 @@
 	
 <mapper namespace="com.ycmedia.dao.AdDao">
 	<select id="getAdList" resultType="com.ycmedia.entity.Creative">
-				SELECT
+		SELECT
 			adId,
-			uid,
+			r_user.mobile AS uid,
 			title,
 			content,
 			loading_page AS loadingPage,
 			audit_reason AS auditReason,
 			audit_reason_show AS additShow,
-			update_time AS updateTime,
 			publish_status AS publishStatus,
-		  create_time as publishTime,
-	    `status` ,
-	  audit_status  as auditStatus,
-   address,
-   CONCAT_WS(',',longtitude,latitude) as lonLa
-	  
-	 
+			`status`,
+			audit_status AS auditStatus,
+			address,
+			CONCAT_WS(',', longtitude, latitude) AS lonLa
 		FROM
 			r_creative
+		LEFT JOIN r_user ON r_creative.uid = r_user.id
 		ORDER BY
-			create_time DESC
+			r_creative.create_time DESC
 	</select>
 	
 	<select id="getCreativeTpl" resultType="com.ycmedia.entity.CreativeTpl">
