@@ -29,6 +29,8 @@ public class QiniuImgController {
 	public static final String AK = "rzPOFiue_68j1lOwApPw4qjSxf8BkXB1CGJF6R6j";
 	public static final String SK = "TMqFfkz-2ASmgpk051gqPOx-sRdwvZHgbZAmwQ0g";
 	Auth auth = Auth.create(AK, SK);
+	public static final String bundle="quanmin";
+	public static final String fileDir="http://o9gl8g305.bkt.clouddn.com//";
 
 	/**
 	 * @param fileName
@@ -39,16 +41,13 @@ public class QiniuImgController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public Map<String, Object> uploadImgFile(@RequestParam("fileName") String fileName,
-			@RequestParam("dirBundle") String dirBundle) throws Exception {
+	public Map<String, Object> uploadImgFile(@RequestParam("fileName") String fileName) throws Exception {
 		// String token =auth.uploadToken(dirBundle);
 		Map<String,Object> map  = new HashMap<String,Object>();
-		String token = auth.uploadToken(dirBundle, null, 3600, null);
+		String token = auth.uploadToken(bundle, null, 3600, null);
 		String str=uploadFile(fileName,token);
-//		String str=uploadFile("D:\\user\\1.gif",token);
-		String lastFileName="http://o9gl8g305.bkt.clouddn.com//"+str;
-		
-		if(!lastFileName.equals("")){
+		String lastFileName=fileDir+str;
+		if(!str.equals("")){
 			map.put("success", true);
 			map.put("path", lastFileName);
 		}else{
@@ -60,40 +59,24 @@ public class QiniuImgController {
 		
 	}
 
+	/**
+	 * 单文件上传
+	 * @param path
+	 * @param token
+	 * @return
+	 */
 	public String uploadFile(String path,String token) {
 		String fileName= "quanmin_"+new Date().getTime()+".jpg";
-		
 		try {
 			Response res = um.put(path, fileName,
 					token);
 			return fileName;
 		} catch (QiniuException e) {
-			
 			return "";
 		}
 		
 	}
 	
 	
-	
-	public void showAllFiles(File dir, String token) throws Exception {
-		File[] fs = dir.listFiles();
-		for (int i = 0; i < fs.length; i++) {
-			if (fs[i].isDirectory()) {
-				try {
-					showAllFiles(fs[i], "");
-				} catch (Exception e) {
-				}
-			} else {
-				System.err.println(fs[i].getAbsolutePath());
-				// 调用put方法上传
-				Response res = um.put(fs[i].getAbsolutePath(), fs[i].getName(),
-						token);
-				// 打印返回的信息
-				System.out.println(res.bodyString());
-
-			}
-		}
-	}
 
 }
