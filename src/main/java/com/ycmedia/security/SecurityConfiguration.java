@@ -25,7 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		//允许访问静态资源
 		http.authorizeRequests()
-				.antMatchers( "/css/**", "/js/**", "/images/**",
+				.antMatchers("/upload", "/css/**", "/js/**", "/images/**",
 						"/resources/**", "/lib/**", "/skin/**", "/template/**")
 				.permitAll();
 		//所有的访问都需要权限验证
@@ -60,9 +60,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
 		//采用自定义验证
-		auth.authenticationProvider(provider);
+//		auth.authenticationProvider(provider);
 		//需要采用加密
-//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 	
 	@Bean
